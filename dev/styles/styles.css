@@ -20,6 +20,7 @@ figure {
   margin: 1em 40px; }
 
 hr {
+  -webkit-box-sizing: content-box;
   box-sizing: content-box;
   height: 0;
   overflow: visible; }
@@ -35,6 +36,7 @@ a {
 abbr[title] {
   border-bottom: none;
   text-decoration: underline;
+  -webkit-text-decoration: underline dotted;
   text-decoration: underline dotted; }
 
 b, strong {
@@ -108,6 +110,7 @@ fieldset {
   padding: .35em .75em .625em; }
 
 legend {
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   color: inherit;
   display: table;
@@ -123,6 +126,7 @@ textarea {
   overflow: auto; }
 
 [type=checkbox], [type=radio] {
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   padding: 0; }
 
@@ -168,22 +172,5 @@ template {
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
-html {
-  font-size: 62.5%; }
-
-body, p {
-  font-size: 1.5rem; }
-
-h1 {
-  font-size: 3.5rem; }
-
-h2 {
-  color: red;
-  font-size: 2.5rem; }
-
-ul, li {
-  list-style-type: none; }
-
-.wrapper {
-  max-width: 800px;
-  margin: 0 auto; }
+.question .one {
+  display: none; }

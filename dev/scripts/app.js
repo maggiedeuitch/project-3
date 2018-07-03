@@ -177,15 +177,15 @@ const quizQuestions = [
 const cocktailList = [
 	{
 		character: "sandy",
-		cocktail: "Shirley Temple"
+		cocktail: "Dirty Shirley",
 	},
 	{
 		character: "danny",
-		cocktail: "T-Bird"
+		cocktail: "57 T-Bird"
 	},
 	{
 		character: "rizzo",
-		cocktail: "The Rizzo"
+		cocktail: "Pink Lady"
 	},
 	{
 		character: "kenickie",
@@ -193,18 +193,131 @@ const cocktailList = [
 	},
 	{
 		character: "frenchy",
-		cocktail: "Strawberry White Russian"
+		cocktail: "Piña Colada"
 	},
 	{
 		character: "jan",
-		cocktail: "Berry Belini"
+		cocktail: "Pink Squirrel"
 	},
 	{
 		character: "putzie",
-		cocktail: "Sidecar"
+		cocktail: "Tom Collins"
 	}
 ]
 
+const recipes = [
+	{
+		cocktailName: "Dirty Shirley",
+		ingredients: [
+			"1 ounce vodka",
+			"1/2 ounce cherry liqueur",
+			"5 ounces lemon-lime soda",
+			"1/4 teaspoon grenadine",
+			"Maraschino cherry, to garnish"
+		],
+		steps: [
+			"Pour the vodka and cherry liqueur into an ice-filled glass.",
+			"Top with the lemon-lime soda.",
+			"Add the grenadine and combine.",
+			"Garnish with the maraschino cherry, and serve."
+		],//steps
+		alcohol: ["Vodka", "Cherry Liqueur"]
+	},//object 1
+
+	{
+		cocktailName: "57 T-Bird",
+		ingredients: [
+			"1 ounce vodka",
+			"2⁄3 ounce amaretto",
+			"2⁄3 ounce melon liqueur",
+			"2⁄3 ounce peach schnapps",
+			"1 2⁄3 ounces fresh orange juice",
+			"2 raspberries, to garnish (optional)",
+			"orange, slice to garnish (optional)"
+		],
+		steps: [
+			"Pour all ingredients into a shaker with ice. Shake.",
+			"Strain into an old-fashioned glass filled with ice.",
+			"Garnish with two raspberries and a slice of orange on a cocktail stick if desired."
+		],
+		alcohol: ["Vodka", "Amaretto", "Melon liqueur", "Peach schnapps"]
+	},
+
+	{
+		cocktailName: "Pink Lady",
+		ingredients: [
+			"1 1/2 ounces gin",
+			"3/4 ounce applejack",
+			"1/4 ounce lemon juice",
+			"4 dashes grenadine",
+			"1 egg white",
+			"Garnish: Maraschino cherry"
+		],
+		steps: [
+			"Shake ingredients very well with ice.",
+			"Strain into cocktail glass.",
+			"Garnish with a cherry."
+		],
+		alcohol: ["Gin", "AppleJack"]
+	},
+	{
+		cocktailName: "Boilermaker",
+		ingredients: [
+			"1 1/3 oz whiskey",
+			"1 pint beer" 
+		],
+		steps: [
+			"Pour whiskey into shot glass.",
+			"Down the whiskey and chase with beer."
+		],
+		alcohol: ["Whiskey", "Beer"]
+	},
+	{
+		cocktailName: "Piña Colada",
+		ingredients: [
+			"3 oz pineapple juice",
+			"1 oz white rum",
+			"1 oz coconut cream",
+			"1 cup crushed ice",
+			"Garnish: slice of pineapple"
+		],
+		steps: [
+			"Put ingredients into blender.",
+			"Blend until smooth.",
+			"Pour into chilled glass and garnish with pineapple."
+		],
+		alcohol: ["White rum"]
+	},
+	{
+		cocktailName: "Pink Squirrel",
+		ingredients: [
+			"1 oz amaretto",
+			"1 1/2 oz white crème de cacao",
+			"1 oz heavy cream",
+			"Garnish: Maraschino cherry"
+		],
+		steps: [
+			"Add ingredients into a shaker filled with ice and shake until cold.",
+			"Strain into a chilled glass and garnish with a cherry."		
+		],
+		alcohol: ["Amaretto", "Creme de cacao white"]
+	},
+	{
+		cocktailName: "Tom Collins",
+		ingredients: [
+			"1 1/2 oz gin",
+			"1 oz fresh lemon juice",
+			"1/2 oz simple syrup",
+			"2 oz club soda",
+			"Garnish: Lemon slice, Maraschino cherry"
+		],
+		steps: [
+			"Mix gin, lemon juice and simple syrup in a tall glass filled with ice.",
+			"Top with club soda and garnish with a lemon slice and cherry."		
+		],
+		alcohol: ["gin"]
+	},
+]//recipes array
 
 
 const $question = $(".question");
@@ -214,24 +327,82 @@ const $results = $(".results");
 const $try = $(".try");
 const $next = $(".next");
 const $again = $(".again");
-// const $imageDiv = $(".hot-sauce-image");
-// const $hotSauceImage = $("#hot-sauce-image");
-// const $link =$("#link");
+const $recipe = $(".recipe");
+const $alcohol =$(".alcohol");
+
 let $currentQuestion = 0;
 let userChoices =[];
 
 $try.hide();
-// $imageDiv.hide();
 $results.hide();
 $again.hide();
-// $link.hide();
+$recipe.hide();
+$alcohol.hide();
 
+//function to create list of ingredients (call when cocktail has been chosen)
+function ingredientsList(array) {
+    // Create the list element:
+    const list = document.createElement('ul');
+    for(let i = 0; i < array.length; i++) {
+        // Create the list item:
+        const item = document.createElement('li');
+        // Set its contents:
+        item.appendChild(document.createTextNode(array[i]));
+        // Add it to the list:
+        list.appendChild(item);
+    }
+    // Finally, return the constructed list:
+    return list;
+}
 
+//function to create list of steps to make cocktail (call when cocktail has been chosen)
+function steps(array) {
+    // Create the list element:
+    const list = document.createElement('ul');
+    for(let i = 0; i < array.length; i++) {
+        // Create the list item:
+        const item = document.createElement('li');
+        // Set its contents:
+        item.appendChild(document.createTextNode(array[i]));
+        // Add it to the list:
+        list.appendChild(item);
+    }
+    // Finally, return the constructed list:
+    return list;
+}
 
+//function to create list of alcohol to search lcbo api (call when cocktail has been chosen)
+function alcohol(array) {
+	const dropdown = document.createElement("select");
+	dropdown.setAttribute("name", "alcoholList");
+	dropdown.setAttribute("id", "alcoholList");
+	// document.getElementById("alcohol").appendChild(dropdown);
 
+	for (let i = 0; i < array.length; i++) {
+    	const opt = document.createElement("option");
+    	opt.value = array[i];
+    	opt.text = array[i];
+    	dropdown.appendChild(opt);
+	}
+	return dropdown;
+}
 
+// var myDiv = document.getElementById("myDiv");
 
+// //Create array of options to be added
 
+// //Create and append select list
+// var selectList = document.createElement("select");
+// selectList.setAttribute("id", "mySelect");
+// myDiv.appendChild(selectList);
+
+// //Create and append the options
+// for (let i = 0; i < array.length; i++) {
+//     const option = document.createElement("option");
+//     option.setAttribute("value", array[i]);
+//     option.text = array[i];
+//     selectList.appendChild(option);
+// }
 
 $(document).ready(function(){
 //shows first question and creates radio buttons for answer choices
@@ -266,22 +437,28 @@ $(document).ready(function(){
 			const character = userCharacter(userChoices);
 			console.log(character);
 //takes most selected value and returns cocktail based on the character's name
-	//if mostselectedvalue = sandy, return sandyCocktail
-
-			// const hotSauceOptions = hotSauces[userChoices[0]];
-			// console.log(hotSauceOptions);
 			const filteredOptions = cocktailList.filter(rest => rest.character === character);
 			const theOne = filteredOptions[0].cocktail;
 			console.log(theOne);
 			$question.hide();
 			$try.show();
-			// $hotSauceImage.attr("src",`${theOne.image}`);
-			// $imageDiv.show();
+//displays cocktail name
 			const resultHTML = `${theOne}`;
 			$results.html(resultHTML);
 			$results.show();
-			// $link.html(`<a href="${theOne.link}" target="_blank">${theOne.name}</a>`);
-			// $link.show();
+//displays ingredients list			
+			const recipeIngredients = recipes.filter(rest => rest.cocktailName === theOne);
+			const theOneRecipeIngredients = recipeIngredients[0].ingredients;
+			document.getElementById("ingredients").appendChild(ingredientsList(theOneRecipeIngredients));
+//displays recipe steps
+			const theOneRecipeSteps = recipeIngredients[0].steps;
+			document.getElementById("steps").appendChild(ingredientsList(theOneRecipeSteps));
+//displays what alcohol is needed and connects to lcboapi
+			$alcohol.show();
+			const theOneAlcohol = recipeIngredients[0].alcohol;
+			document.getElementById("alcohol").appendChild(alcohol(theOneAlcohol));
+
+
 			$next.hide();
 			$again.show();
 			$again.on("click", function(event) {
@@ -289,17 +466,39 @@ $(document).ready(function(){
 				location.reload();
 
 			});
-		}
-	});
+
+			const key = "Token MDowNTgwNzdhOC03NjQ1LTExZTgtOTgyNS0wMzUwMDdkOWZiNWY6WTFuaFpMRFhRalRpYlNCMGg1b2hrekhWYmNKRHRhcVhqck1o";
+
+			const getAlcohol = (query) => {
+				$.ajax({
+					  url: 'http://lcboapi.com/products',
+					  headers: {
+					    Authorization: key
+					  },
+					  method:"GET",
+					  data: {
+					  	q: query
+					  }
+				}).then(function(data) {
+				  console.log(data);
+				})
+			};
+
+			getAlcohol(theOneAlcohol[0]);
+			$("#alcoholList").on("change", function () {
+				// console.log("new alcohol selected");
+				const selectedAlcohol = $(this).val();
+				console.log(selectedAlcohol);
+				getAlcohol(selectedAlcohol);
+			});
+		}//else
+	});//next.on.click
+
+
 
 });
 
-// $(document).ready(function(){
-// 	console.log("ready");
-// 	userChoices.push(quizQuestions[0].choices[0].value);
-// 	console.log(userChoices);
-
-
-
-
-// });
+//display the recipe on signature cocktail result page
+//user can click on ingredients list for alcohol
+//search the lcbo for alcohol on click
+//display the name, price, sale for each 

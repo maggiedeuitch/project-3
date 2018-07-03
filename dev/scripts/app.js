@@ -315,7 +315,7 @@ const recipes = [
 			"Mix gin, lemon juice and simple syrup in a tall glass filled with ice.",
 			"Top with club soda and garnish with a lemon slice and cherry."		
 		],
-		alcohol: ["gin"]
+		alcohol: ["Gin"]
 	},
 ]//recipes array
 
@@ -387,22 +387,7 @@ function alcohol(array) {
 	return dropdown;
 }
 
-// var myDiv = document.getElementById("myDiv");
 
-// //Create array of options to be added
-
-// //Create and append select list
-// var selectList = document.createElement("select");
-// selectList.setAttribute("id", "mySelect");
-// myDiv.appendChild(selectList);
-
-// //Create and append the options
-// for (let i = 0; i < array.length; i++) {
-//     const option = document.createElement("option");
-//     option.setAttribute("value", array[i]);
-//     option.text = array[i];
-//     selectList.appendChild(option);
-// }
 
 $(document).ready(function(){
 //shows first question and creates radio buttons for answer choices
@@ -435,6 +420,8 @@ $(document).ready(function(){
 			        - array.filter(v => v===b).length).pop();
 			};
 			const character = userCharacter(userChoices);
+			const $character = $("<h2>").text("You're "+character+ " !");
+			$("#greaseCharacter").append($character);
 			console.log(character);
 //takes most selected value and returns cocktail based on the character's name
 			const filteredOptions = cocktailList.filter(rest => rest.character === character);
@@ -469,6 +456,7 @@ $(document).ready(function(){
 
 			const key = "Token MDowNTgwNzdhOC03NjQ1LTExZTgtOTgyNS0wMzUwMDdkOWZiNWY6WTFuaFpMRFhRalRpYlNCMGg1b2hrekhWYmNKRHRhcVhqck1o";
 
+
 			const getAlcohol = (query) => {
 				$.ajax({
 					  url: 'http://lcboapi.com/products',
@@ -477,12 +465,40 @@ $(document).ready(function(){
 					  },
 					  method:"GET",
 					  data: {
-					  	q: query
+					  	q: query,
+					  	per_page: 10
 					  }
-				}).then(function(data) {
-				  console.log(data);
-				})
+				}).then(function(result) {
+					// displayAlcohol(result); 
+					const alcoholObjects = result.result;
+					displayAlcohol(alcoholObjects);
+				});
 			};
+			const displayAlcohol = (allAlcohol) => {
+				$("#alcoholData").empty();
+				allAlcohol.filter((spiritsOnly) => {
+					return spiritsOnly.package_unit_type != "can";
+				});
+
+				allAlcohol.forEach((bottle) => {
+					console.log(bottle);
+					const $imgThumb = $("<img>").attr("src", bottle.image_thumb_url);
+					const $name = $("<h4>").text(bottle.name);
+					const $origin = $("<p>").addClass("origin").text(bottle.origin);
+					const $style = $("<p>").addClass("style").text(bottle.style);
+					const $priceInCents = bottle.price_in_cents;
+					const priceInDollars = (price) => {
+						let dollars = price / 100;
+						dollars = dollars.toFixed(2);
+						return dollars;
+					}
+					console.log(priceInDollars($priceInCents));
+
+					const $price = $("<p>").addClass("price").text("$"+ priceInDollars($priceInCents));
+					$("#alcoholData").append($imgThumb, $name, $origin, $style, $price);
+
+			});
+			}
 
 			getAlcohol(theOneAlcohol[0]);
 			$("#alcoholList").on("change", function () {
@@ -491,6 +507,8 @@ $(document).ready(function(){
 				console.log(selectedAlcohol);
 				getAlcohol(selectedAlcohol);
 			});
+
+
 		}//else
 	});//next.on.click
 

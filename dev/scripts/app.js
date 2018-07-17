@@ -70,13 +70,13 @@ const quizQuestions = [
 				answer: "I have great leadership qualities.",
 				value: "danny"
 			},
-			{	answer: "I'm a dreamer and can come off as ditzy.",
+			{	answer: "I'm a dreamer.",
 				value: "frenchy"
 			},
 			{	answer: "I'm hard-working and try to do the right thing.",
 				value: "kenickie"
 			},
-			{	answer: "I can be loud and bubbly.",
+			{	answer: "I can be loud and bubbly with people I'm close to.",
 				value: "jan"
 			},
 			{	answer: "I like to clown around and not take things too seriously.",
@@ -216,10 +216,10 @@ const recipes = [
 			"Maraschino cherry, to garnish"
 		],
 		steps: [
-			"Pour the vodka and cherry liqueur into an ice-filled glass.",
-			"Top with the lemon-lime soda.",
-			"Add the grenadine and combine.",
-			"Garnish with the maraschino cherry, and serve."
+			"1. Pour the vodka and cherry liqueur into an ice-filled glass.",
+			"2. Top with the lemon-lime soda.",
+			"3. Add the grenadine and combine.",
+			"4. Garnish with the maraschino cherry, and serve."
 		],//steps
 		alcohol: ["Vodka", "Cherry Liqueur"]
 	},//object 1
@@ -236,9 +236,9 @@ const recipes = [
 			"orange, slice to garnish (optional)"
 		],
 		steps: [
-			"Pour all ingredients into a shaker with ice. Shake.",
-			"Strain into an old-fashioned glass filled with ice.",
-			"Garnish with two raspberries and a slice of orange on a cocktail stick if desired."
+			"1. Pour all ingredients into a shaker with ice. Shake.",
+			"2. Strain into an old-fashioned glass filled with ice.",
+			"3. Garnish with two raspberries and a slice of orange on a cocktail stick if desired."
 		],
 		alcohol: ["Vodka", "Amaretto", "Melon liqueur", "Peach schnapps"]
 	},
@@ -254,9 +254,9 @@ const recipes = [
 			"Garnish: Maraschino cherry"
 		],
 		steps: [
-			"Shake ingredients very well with ice.",
-			"Strain into cocktail glass.",
-			"Garnish with a cherry."
+			"1. Shake ingredients very well with ice.",
+			"2. Strain into cocktail glass.",
+			"3. Garnish with a cherry."
 		],
 		alcohol: ["Gin", "AppleJack"]
 	},
@@ -267,8 +267,8 @@ const recipes = [
 			"1 pint beer" 
 		],
 		steps: [
-			"Pour whiskey into shot glass.",
-			"Down the whiskey and chase with beer."
+			"1. Pour whiskey into shot glass.",
+			"2. Down the whiskey and chase with beer."
 		],
 		alcohol: ["Whiskey", "Beer"]
 	},
@@ -282,9 +282,9 @@ const recipes = [
 			"Garnish: slice of pineapple"
 		],
 		steps: [
-			"Put ingredients into blender.",
-			"Blend until smooth.",
-			"Pour into chilled glass and garnish with pineapple."
+			"1. Put ingredients into blender.",
+			"2. Blend until smooth.",
+			"3. Pour into chilled glass and garnish with pineapple."
 		],
 		alcohol: ["White rum"]
 	},
@@ -297,8 +297,8 @@ const recipes = [
 			"Garnish: Maraschino cherry"
 		],
 		steps: [
-			"Add ingredients into a shaker filled with ice and shake until cold.",
-			"Strain into a chilled glass and garnish with a cherry."		
+			"1. Add ingredients into a shaker filled with ice and shake until cold.",
+			"2. Strain into a chilled glass and garnish with a cherry."		
 		],
 		alcohol: ["Amaretto", "Creme de cacao white"]
 	},
@@ -312,8 +312,8 @@ const recipes = [
 			"Garnish: Lemon slice, Maraschino cherry"
 		],
 		steps: [
-			"Mix gin, lemon juice and simple syrup in a tall glass filled with ice.",
-			"Top with club soda and garnish with a lemon slice and cherry."		
+			"1. Mix gin, lemon juice and simple syrup in a tall glass filled with ice.",
+			"2. Top with club soda and garnish with a lemon slice and cherry."		
 		],
 		alcohol: ["Gin"]
 	},
@@ -322,19 +322,24 @@ const recipes = [
 
 const $question = $(".question");
 const $totalQuestions = quizQuestions.length;
-const $choices = $(".choices");
+const $choices = $("#choiceList");
 const $results = $(".results");
+const $characterImageDiv = $(".characterImage");
 const $try = $(".try");
+const $method =$(".method");
 const $next = $(".next");
 const $again = $(".again");
 const $recipe = $(".recipe");
 const $alcohol =$(".alcohol");
 
+
 let $currentQuestion = 0;
 let userChoices =[];
 
 $try.hide();
+$method.hide();
 $results.hide();
+$characterImageDiv.hide();
 $again.hide();
 $recipe.hide();
 $alcohol.hide();
@@ -376,7 +381,6 @@ function alcohol(array) {
 	const dropdown = document.createElement("select");
 	dropdown.setAttribute("name", "alcoholList");
 	dropdown.setAttribute("id", "alcoholList");
-	// document.getElementById("alcohol").appendChild(dropdown);
 
 	for (let i = 0; i < array.length; i++) {
     	const opt = document.createElement("option");
@@ -395,7 +399,9 @@ $(document).ready(function(){
 	let i = 0;
 	quizQuestions[i].choices.forEach((choice) => {
 		let radioBtn = $('<input type="radio"  id="'+(choice.answer)+'" name="'+ quizQuestions[i].choices +'" value="'+ (choice.value) +'" checked /><label for="'+(choice.answer)+'">' + (choice.answer) + '</label>');
-		$choices.append(radioBtn);
+		let $choiceList = $("<li>").append(radioBtn);
+		$("#choiceList").append($choiceList);
+
 	});
 //pushes user's choice to new array when "next" is clicked then resets
 	$next.on("click", function(event) {
@@ -411,7 +417,8 @@ $(document).ready(function(){
 				i++;
 				quizQuestions[i].choices.forEach((choice) => {
 					let radioBtn = $('<input type="radio" id="'+(choice.answer)+'" name="'+ quizQuestions[i].choices +'" value="' + (choice.value) +'" checked /><label for="'+(choice.answer)+'">' + (choice.answer) + '</label>');
-					$choices.append(radioBtn);
+					let $choiceList = $("<li>").append(radioBtn);
+					$("#choiceList").append($choiceList);
 				});
 		} else {//return the most selected value once questions are finished
 			const userCharacter = function mostSelectedValue(array){
@@ -420,9 +427,14 @@ $(document).ready(function(){
 			        - array.filter(v => v===b).length).pop();
 			};
 			const character = userCharacter(userChoices);
-			const $character = $("<h2>").text("You're "+character+ " !");
+			const $character = $("<h2>").text("Hey, " +character+ "!");
 			$("#greaseCharacter").append($character);
 			console.log(character);
+//displays character image
+			const $characterImage = $("#characterImage").attr("src", "../dev/assets/"+ character +".svg");
+			$("#characterImage").append($characterImage);
+			$characterImageDiv.show();
+
 //takes most selected value and returns cocktail based on the character's name
 			const filteredOptions = cocktailList.filter(rest => rest.character === character);
 			const theOne = filteredOptions[0].cocktail;
@@ -430,16 +442,18 @@ $(document).ready(function(){
 			$question.hide();
 			$try.show();
 //displays cocktail name
-			const resultHTML = `${theOne}`;
-			$results.html(resultHTML);
+			const $signatureCocktail = $("<h2>").text("Your signature cocktail is the " +theOne+ ".");
+			$(".results").append($signatureCocktail);
 			$results.show();
 //displays ingredients list			
 			const recipeIngredients = recipes.filter(rest => rest.cocktailName === theOne);
 			const theOneRecipeIngredients = recipeIngredients[0].ingredients;
 			document.getElementById("ingredients").appendChild(ingredientsList(theOneRecipeIngredients));
 //displays recipe steps
+			$method.show();
 			const theOneRecipeSteps = recipeIngredients[0].steps;
 			document.getElementById("steps").appendChild(ingredientsList(theOneRecipeSteps));
+
 //displays what alcohol is needed and connects to lcboapi
 			$alcohol.show();
 			const theOneAlcohol = recipeIngredients[0].alcohol;
@@ -454,8 +468,8 @@ $(document).ready(function(){
 
 			});
 
+//API KEY
 			const key = "Token MDowNTgwNzdhOC03NjQ1LTExZTgtOTgyNS0wMzUwMDdkOWZiNWY6WTFuaFpMRFhRalRpYlNCMGg1b2hrekhWYmNKRHRhcVhqck1o";
-
 
 			const getAlcohol = (query) => {
 				$.ajax({
@@ -466,21 +480,21 @@ $(document).ready(function(){
 					  method:"GET",
 					  data: {
 					  	q: query,
-					  	per_page: 10
+					  	per_page: 20
 					  }
 				}).then(function(result) {
-					// displayAlcohol(result); 
 					const alcoholObjects = result.result;
 					displayAlcohol(alcoholObjects);
 				});
 			};
+
 			const displayAlcohol = (allAlcohol) => {
 				$("#alcoholData").empty();
-				allAlcohol.filter((spiritsOnly) => {
-					return spiritsOnly.package_unit_type != "can";
+				const filtered = allAlcohol.filter((spiritsOnly) => {
+					return spiritsOnly.volume_in_milliliters >= 750 && spiritsOnly.primary_category != "Ready-to-Drink/Coolers";
 				});
 
-				allAlcohol.forEach((bottle) => {
+				filtered.forEach((bottle) => {
 					console.log(bottle);
 					const $imgThumb = $("<img>").attr("src", bottle.image_thumb_url);
 					const $name = $("<h4>").text(bottle.name);
@@ -495,14 +509,15 @@ $(document).ready(function(){
 					console.log(priceInDollars($priceInCents));
 
 					const $price = $("<p>").addClass("price").text("$"+ priceInDollars($priceInCents));
-					$("#alcoholData").append($imgThumb, $name, $origin, $style, $price);
+					const $drinkContainer = $("<div>").append($imgThumb, $name, $origin, $style, $price);
+					$("#alcoholData").append($drinkContainer);
 
 			});
 			}
 
+
 			getAlcohol(theOneAlcohol[0]);
 			$("#alcoholList").on("change", function () {
-				// console.log("new alcohol selected");
 				const selectedAlcohol = $(this).val();
 				console.log(selectedAlcohol);
 				getAlcohol(selectedAlcohol);
@@ -516,7 +531,3 @@ $(document).ready(function(){
 
 });
 
-//display the recipe on signature cocktail result page
-//user can click on ingredients list for alcohol
-//search the lcbo for alcohol on click
-//display the name, price, sale for each 

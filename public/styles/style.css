@@ -172,18 +172,96 @@ html {
   font-size: 62.5%; }
 
 body, p {
-  font-size: 1.5rem; }
+  font-size: 1.5rem;
+  font-family: "Lato", sans-serif; }
+
+h1, .next, .again {
+  text-transform: uppercase; }
 
 h1 {
-  font-size: 3.5rem; }
+  font-size: 3.5rem;
+  font-family: "Chicle", cursive;
+  letter-spacing: .3rem; }
 
 h2 {
-  color: red;
+  color: #991111;
   font-size: 2.5rem; }
 
+#greaseCharacter {
+  text-transform: capitalize; }
+
+a {
+  text-decoration: none;
+  color: #991111; }
+
+a:hover, label:hover {
+  color: turquoise;
+  transition: all .2s; }
+
 ul, li {
-  list-style-type: none; }
+  list-style-type: none;
+  margin-bottom: 5px;
+  padding: 0; }
 
 .wrapper {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto; }
+
+header {
+  background-color: #FCF464;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; }
+
+.quiz {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 10px;
+  padding: 2%;
+  box-shadow: 1px 0 #991111, 1px 2px #991111, 2px 1px #991111, 2px 3px #991111, 3px 2px #991111, 3px 4px #991111, 4px 3px #991111, 4px 5px #991111, 5px 4px #991111, 5px 6px #991111, 6px 5px #991111, 6px 7px #991111, 7px 6px #991111, 7px 8px #991111, 8px 7px #991111, 8px 9px #991111, 9px 8px #991111, 9px 10px #991111, 10px 9px #991111, 10px 11px #991111; }
+
+label {
+  margin-left: 3px;
+  margin-right: 20px; }
+
+input[type="radio"]:checked + label {
+  color: darkturquoise; }
+
+.next, .again {
+  background-color: #991111;
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 30px;
+  text-transform: uppercase; }
+  .next:hover, .again:hover {
+    background-color: turquoise;
+    transition: all .2s;
+    cursor: pointer; }
+
+.characterContainer, .cocktailContainer {
+  float: left; }
+
+.cocktailContainer {
+  margin-left: 30px; }
+
+.alcohol {
+  clear: both; }
+
+#characterImage {
+  width: 225px;
+  height: 275px; }
+
+#alcoholData {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center; }

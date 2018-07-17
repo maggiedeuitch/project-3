@@ -3,31 +3,38 @@
 <head>
 	<meta charset="UTF-8">
 	<title>What's Your Signature Grease Cocktail?</title>
+	<link href="https://fonts.googleapis.com/css?family=Chicle|Lato" rel="stylesheet">
 	<link rel="stylesheet" href="public/styles/style.css">
 </head>
 <body>
 	<header>
-		<div class="wrapper">
+		<div class="quiz wrapper clearfix">
 			<h1>What is your signature Grease cocktail?</h1>
-		</div>
-	</header>
-	<main>
-		<div class="quiz wrapper">
 			<h2 class="question"></h2>
-			<div class="choices"></div>
-			<div id= "greaseCharacter"></div>
-			<h2 class="try">This is your signature Grease cocktail!</h2>
-			<div class="results"></div>
-			<div id="ingredients"></div>
-			<div id="steps"></div>
+			<div class="choices">
+				<ul id="choiceList">
+				</ul>
+			</div>
+			<div class="resultsContainer">
+				<div class="characterContainer">
+					<div class="characterImage">
+						<img id="characterImage" src="">
+					</div>
+				</div>
+				<div class="cocktailContainer">
+					<div id= "greaseCharacter"></div>
+					<div class="results"></div>
+					<div id="ingredients"></div>
+					<div id="steps"></div>
+				</div>
+			</div><!--resultsContainer-->
 			<div class="alcohol" id="alcohol">Looks like you need some</div>
 			<div id="alcoholData"></div>
-<!-- 			<div id="link"></div>
- -->			<p class="next">Next</p>
- <p class="again">Start Again</p>
-			
+			<p class="next">Next</p>
+			<p class="again">Start Again</p>
 		</div><!--quiz wrapper-->
-	</main>
+	</header>
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="public/scripts/app.js"></script>
 	

@@ -5,10 +5,15 @@ html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}bo
 * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 
 
+// font-family: 'Lato', sans-serif;
+// font-family: 'Chicle', cursive;
 
-// .one{
-// 	display: none;
-// }
+$pink:#ffccdd;
+$black:#110022;
+$blueGrey:#99aabb;
+$yellow:#FCF464;
+$red:#991111;
+
 
 html {
 	font-size: 62.5%;
@@ -16,22 +21,145 @@ html {
 
 body, p {
 	font-size: 1.5rem;
+	font-family: "Lato", sans-serif;
+}
+
+h1, .next, .again {
+	text-transform: uppercase;
 }
 
 h1 {
 	font-size: 3.5rem;
+	font-family: "Chicle", cursive;
+	letter-spacing: .3rem;
 }
 
 h2 {
-	color: red;
+	color: $red;
 	font-size: 2.5rem;
+}
+
+#greaseCharacter {
+	text-transform: capitalize;
+}
+
+a {
+	text-decoration: none;
+	color: $red;
+}
+
+a:hover, label:hover {
+	color: turquoise;
+	transition: all .2s;
 }
 
 ul, li {
 	list-style-type: none;
+	margin-bottom: 5px;
+	padding: 0;
 }
 
+
+
 .wrapper {
-	max-width: 800px;
+	max-width: 1000px;
 	margin: 0 auto;
+}
+
+header {
+	background-color: $yellow;
+	// background-repeat: no-repeat;
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+}
+
+.quiz {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	margin: 0 auto;
+	background-color: white;
+	border-radius: 10px;
+	padding: 2%;
+	box-shadow: 
+	 01px 0 $red,
+	 01px 02px $red,
+	 02px 01px $red,
+	 02px 03px $red,
+	 03px 02px $red,
+	 03px 04px $red,
+	 04px 03px $red,
+	 04px 05px $red,
+	 05px 04px $red,
+	 05px 06px $red,
+	 06px 05px $red,
+	 06px 07px $red,
+	 07px 06px $red,
+	 07px 08px $red,
+	 08px 07px $red,
+	 08px 09px $red,
+	 09px 08px $red,
+	 09px 10px $red,
+	 10px 09px $red,
+	 10px 11px $red;
+}
+
+label {
+	margin-left: 3px;
+	margin-right: 20px;			
+}
+
+input[type="radio"]:checked+label {
+	color: darkturquoise;
+}
+
+.next, .again {
+	background-color: $red;
+	color: white;
+	border-radius: 5px;
+	padding: 10px;
+	margin-top: 30px;
+	text-transform: uppercase;
+		&:hover {
+			background-color: turquoise;
+			transition: all .2s;
+			cursor: pointer; 
+
+		}
+}
+
+
+.characterContainer, .cocktailContainer {
+	float: left;
+}
+
+.cocktailContainer {
+	margin-left: 30px;
+}
+
+.alcohol {
+	clear: both;
+}
+
+
+#characterImage {
+  // object-fit: contain;
+  width: 225px;
+  height: 275px;
+}
+
+
+
+
+#alcoholData {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;	
 }

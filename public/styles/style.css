@@ -181,18 +181,23 @@ h1, .next, .again {
 h1 {
   font-size: 3.5rem;
   font-family: "Chicle", cursive;
-  letter-spacing: .3rem; }
+  letter-spacing: .3rem;
+  color: turquoise; }
 
 h2 {
-  color: #991111;
+  color: hotpink;
   font-size: 2.5rem; }
+
+h3 {
+  color: turquoise;
+  margin-bottom: 0; }
 
 #greaseCharacter {
   text-transform: capitalize; }
 
 a {
   text-decoration: none;
-  color: #991111; }
+  color: hotpink; }
 
 a:hover, label:hover {
   color: turquoise;
@@ -208,7 +213,9 @@ ul, li {
   margin: 0 auto; }
 
 header {
-  background-color: #FCF464;
+  background-image: url(/assets/greaseHeader.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
@@ -226,7 +233,7 @@ header {
   background-color: white;
   border-radius: 10px;
   padding: 2%;
-  box-shadow: 1px 0 #991111, 1px 2px #991111, 2px 1px #991111, 2px 3px #991111, 3px 2px #991111, 3px 4px #991111, 4px 3px #991111, 4px 5px #991111, 5px 4px #991111, 5px 6px #991111, 6px 5px #991111, 6px 7px #991111, 7px 6px #991111, 7px 8px #991111, 8px 7px #991111, 8px 9px #991111, 9px 8px #991111, 9px 10px #991111, 10px 9px #991111, 10px 11px #991111; }
+  box-shadow: 01px 0 hotpink, 01px 02px hotpink, 02px 01px hotpink, 02px 03px hotpink, 03px 02px hotpink, 03px 04px hotpink, 04px 03px hotpink, 04px 05px hotpink, 05px 04px hotpink, 05px 06px hotpink, 06px 05px hotpink, 06px 07px hotpink, 07px 06px hotpink, 07px 08px hotpink, 08px 07px hotpink, 08px 09px hotpink, 09px 08px hotpink, 09px 10px hotpink, 10px 09px hotpink, 10px 11px hotpink; }
 
 label {
   margin-left: 3px;
@@ -236,7 +243,7 @@ input[type="radio"]:checked + label {
   color: darkturquoise; }
 
 .next, .again {
-  background-color: #991111;
+  background-color: hotpink;
   color: white;
   border-radius: 5px;
   padding: 10px;
@@ -256,7 +263,7 @@ input[type="radio"]:checked + label {
 .alcohol {
   clear: both; }
 
-#characterImage {
+#cocktailImage {
   width: 225px;
   height: 275px; }
 

@@ -8,12 +8,6 @@ html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}bo
 // font-family: 'Lato', sans-serif;
 // font-family: 'Chicle', cursive;
 
-$pink:#ffccdd;
-$black:#110022;
-$blueGrey:#99aabb;
-$yellow:#FCF464;
-$red:#991111;
-
 
 html {
 	font-size: 62.5%;
@@ -32,11 +26,17 @@ h1 {
 	font-size: 3.5rem;
 	font-family: "Chicle", cursive;
 	letter-spacing: .3rem;
+	color: turquoise;
 }
 
 h2 {
-	color: $red;
+	color: hotpink;
 	font-size: 2.5rem;
+}
+
+h3 {
+	color: turquoise;
+	margin-bottom: 0;
 }
 
 #greaseCharacter {
@@ -45,7 +45,7 @@ h2 {
 
 a {
 	text-decoration: none;
-	color: $red;
+	color: hotpink;
 }
 
 a:hover, label:hover {
@@ -67,8 +67,9 @@ ul, li {
 }
 
 header {
-	background-color: $yellow;
-	// background-repeat: no-repeat;
+	background-image: url(/assets/greaseHeader.svg);
+	background-size: cover;
+	background-repeat: no-repeat;
 	display: flex;
 	flex-direction: column;
 	margin: 0 auto;
@@ -88,27 +89,28 @@ header {
 	border-radius: 10px;
 	padding: 2%;
 	box-shadow: 
-	 01px 0 $red,
-	 01px 02px $red,
-	 02px 01px $red,
-	 02px 03px $red,
-	 03px 02px $red,
-	 03px 04px $red,
-	 04px 03px $red,
-	 04px 05px $red,
-	 05px 04px $red,
-	 05px 06px $red,
-	 06px 05px $red,
-	 06px 07px $red,
-	 07px 06px $red,
-	 07px 08px $red,
-	 08px 07px $red,
-	 08px 09px $red,
-	 09px 08px $red,
-	 09px 10px $red,
-	 10px 09px $red,
-	 10px 11px $red;
+	 01px 0 hotpink,
+	 01px 02px hotpink,
+	 02px 01px hotpink,
+	 02px 03px hotpink,
+	 03px 02px hotpink,
+	 03px 04px hotpink,
+	 04px 03px hotpink,
+	 04px 05px hotpink,
+	 05px 04px hotpink,
+	 05px 06px hotpink,
+	 06px 05px hotpink,
+	 06px 07px hotpink,
+	 07px 06px hotpink,
+	 07px 08px hotpink,
+	 08px 07px hotpink,
+	 08px 09px hotpink,
+	 09px 08px hotpink,
+	 09px 10px hotpink,
+	 10px 09px hotpink,
+	 10px 11px hotpink;
 }
+
 
 label {
 	margin-left: 3px;
@@ -120,7 +122,7 @@ input[type="radio"]:checked+label {
 }
 
 .next, .again {
-	background-color: $red;
+	background-color: hotpink;
 	color: white;
 	border-radius: 5px;
 	padding: 10px;
@@ -148,8 +150,7 @@ input[type="radio"]:checked+label {
 }
 
 
-#characterImage {
-  // object-fit: contain;
+#cocktailImage {
   width: 225px;
   height: 275px;
 }

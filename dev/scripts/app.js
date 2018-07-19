@@ -15,7 +15,7 @@ const quizQuestions = [
 				answer: "Some red lipstick",
 				value: "rizzo"
 			},
-			{	answer: "A leather jacket",
+			{	answer: "My leather jacket",
 				value: "danny"
 			},
 			{	answer: "Cigarettes",
@@ -27,7 +27,7 @@ const quizQuestions = [
 			{	answer: "My hairbrush",
 				value: "frenchy"
 			},
-			{	answer: "My water gun",
+			{	answer: "A comic book",
 				value: "putzie"
 			},
 			{	answer: "A snack",
@@ -76,7 +76,7 @@ const quizQuestions = [
 			{	answer: "I'm hard-working and try to do the right thing.",
 				value: "kenickie"
 			},
-			{	answer: "I can be loud and bubbly with people I'm close to.",
+			{	answer: "I'm shy but can be loud and bubbly with people I'm close to.",
 				value: "jan"
 			},
 			{	answer: "I like to clown around and not take things too seriously.",
@@ -118,6 +118,33 @@ const quizQuestions = [
 		]
 	},
 	{	
+		question: "What's your idea of the perfect date?",
+		choices: [
+			{
+				answer: "Seeing a live comedy show.",
+				value: "putzie"
+			},
+			{	answer: "There is no such thing.",
+				value: "rizzo"
+			},
+			{	answer: "Spending the day at the beach.",
+				value: "sandy"
+			},
+			{	answer: "Going to the drive through and ending up in a make out session.",
+				value: "danny"
+			},
+			{	answer: "Going go-kart racing",
+				value: "kenickie"
+			},
+			{	answer: "April 25th, because it's not too hot, not too cold, all you need is a light jacket.",
+				value: "frenchy"
+			},
+			{	answer: "Dinner at a restaurant followed by ice cream somewhere.",
+				value: "jan"
+			}			
+		]
+	},
+	{	
 		question: "Which of these would you binge watch?",
 		choices: [
 			{
@@ -141,6 +168,33 @@ const quizQuestions = [
 			},
 			{	answer: "Girls",
 				value: "rizzo"
+			}			
+		]
+	},
+	{	
+		question: "What was your favourite class in high school?",
+		choices: [
+			{
+				answer: "None. I spent most of my time skipping school.",
+				value: "rizzo"
+			},
+			{	answer: "Drama",
+				value: "putzie"
+			},
+			{	answer: "I loved every class.",
+				value: "sandy"
+			},
+			{	answer: "Anything but gym class.",
+				value: "danny"
+			},
+			{	answer: "Shop class",
+				value: "kenickie"
+			},
+			{	answer: "None. I dropped out.",
+				value: "frenchy"
+			},
+			{	answer: "Home Economics",
+				value: "jan"
 			}			
 		]
 	},
@@ -178,30 +232,37 @@ const cocktailList = [
 	{
 		character: "sandy",
 		cocktail: "Dirty Shirley",
+		image: "dirtyShirley"
 	},
 	{
 		character: "danny",
-		cocktail: "57 T-Bird"
+		cocktail: "57 T-Bird",
+		image: "57tbird"
 	},
 	{
 		character: "rizzo",
-		cocktail: "Pink Lady"
+		cocktail: "Pink Lady",
+		image: "pinkLady"
 	},
 	{
 		character: "kenickie",
-		cocktail: "Boilermaker"
+		cocktail: "Boilermaker",
+		image: "boilermaker"
 	},
 	{
 		character: "frenchy",
-		cocktail: "Piña Colada"
+		cocktail: "Piña Colada",
+		image: "pinaColada"
 	},
 	{
 		character: "jan",
-		cocktail: "Pink Squirrel"
+		cocktail: "Pink Squirrel",
+		image: "pinkSquirrel"
 	},
 	{
 		character: "putzie",
-		cocktail: "Tom Collins"
+		cocktail: "Tom Collins",
+		image: "tomCollins"
 	}
 ]
 
@@ -238,7 +299,7 @@ const recipes = [
 		steps: [
 			"1. Pour all ingredients into a shaker with ice. Shake.",
 			"2. Strain into an old-fashioned glass filled with ice.",
-			"3. Garnish with two raspberries and a slice of orange on a cocktail stick if desired."
+			"3. Garnish with two raspberries and a slice of orange if desired."
 		],
 		alcohol: ["Vodka", "Amaretto", "Melon liqueur", "Peach schnapps"]
 	},
@@ -294,6 +355,7 @@ const recipes = [
 			"1 oz amaretto",
 			"1 1/2 oz white crème de cacao",
 			"1 oz heavy cream",
+			"1 dash grenadine",
 			"Garnish: Maraschino cherry"
 		],
 		steps: [
@@ -324,8 +386,9 @@ const $question = $(".question");
 const $totalQuestions = quizQuestions.length;
 const $choices = $("#choiceList");
 const $results = $(".results");
-const $characterImageDiv = $(".characterImage");
+const $cocktailImageDiv = $(".cocktailImage");
 const $try = $(".try");
+const $ingredients = $(".ingredients")
 const $method =$(".method");
 const $next = $(".next");
 const $again = $(".again");
@@ -337,9 +400,10 @@ let $currentQuestion = 0;
 let userChoices =[];
 
 $try.hide();
+$ingredients.hide();
 $method.hide();
 $results.hide();
-$characterImageDiv.hide();
+$cocktailImageDiv.hide();
 $again.hide();
 $recipe.hide();
 $alcohol.hide();
@@ -430,10 +494,6 @@ $(document).ready(function(){
 			const $character = $("<h2>").text("Hey, " +character+ "!");
 			$("#greaseCharacter").append($character);
 			console.log(character);
-//displays character image
-			const $characterImage = $("#characterImage").attr("src", "../dev/assets/"+ character +".svg");
-			$("#characterImage").append($characterImage);
-			$characterImageDiv.show();
 
 //takes most selected value and returns cocktail based on the character's name
 			const filteredOptions = cocktailList.filter(rest => rest.character === character);
@@ -441,6 +501,11 @@ $(document).ready(function(){
 			console.log(theOne);
 			$question.hide();
 			$try.show();
+//displays cocktail image
+			const $cocktailImage = $("#cocktailImage").attr("src", "assets/"+ filteredOptions[0].image +".svg");
+			$("#cocktailImage").append($cocktailImage);
+			$cocktailImageDiv.show();
+
 //displays cocktail name
 			const $signatureCocktail = $("<h2>").text("Your signature cocktail is the " +theOne+ ".");
 			$(".results").append($signatureCocktail);
@@ -448,6 +513,7 @@ $(document).ready(function(){
 //displays ingredients list			
 			const recipeIngredients = recipes.filter(rest => rest.cocktailName === theOne);
 			const theOneRecipeIngredients = recipeIngredients[0].ingredients;
+			$ingredients.show();
 			document.getElementById("ingredients").appendChild(ingredientsList(theOneRecipeIngredients));
 //displays recipe steps
 			$method.show();
@@ -467,6 +533,10 @@ $(document).ready(function(){
 				location.reload();
 
 			});
+
+			$('header').css({"background-color":"yellow", "background-image":"url(/assets/" +character+ ".svg)", "background-size":"150px 225px", "background-repeat":"repeat"});
+
+
 
 //API KEY
 			const key = "Token MDowNTgwNzdhOC03NjQ1LTExZTgtOTgyNS0wMzUwMDdkOWZiNWY6WTFuaFpMRFhRalRpYlNCMGg1b2hrekhWYmNKRHRhcVhqck1o";
@@ -497,7 +567,7 @@ $(document).ready(function(){
 				filtered.forEach((bottle) => {
 					console.log(bottle);
 					const $imgThumb = $("<img>").attr("src", bottle.image_thumb_url);
-					const $name = $("<h4>").text(bottle.name);
+					const $name = $("<h3>").text(bottle.name);
 					const $origin = $("<p>").addClass("origin").text(bottle.origin);
 					const $style = $("<p>").addClass("style").text(bottle.style);
 					const $priceInCents = bottle.price_in_cents;
